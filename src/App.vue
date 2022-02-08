@@ -1,17 +1,43 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <table>
+      <thead>
+        <th>Személy</th>
+        <th>Magasság</th>
+        <th>Ár</th>
+        <th>Műveletek</th>
+      </thead>
+      <tbody>
+        <tr v-for="statue in statues" v-bind:key="statue.id">
+          <td>{{statue.person}}</td>
+          <td>{{statue.height}}</td>
+          <td>{{statue.price}}</td>
+          <td>
+            <button>Törlés</button>
+            <button>Szerkesztés</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+  },
+  data() {
+    return {
+      statues: [],
+      statue: {
+        id: null,
+        person: "",
+        height: null,
+        price: null
+      }
+    }
   }
 }
 </script>
