@@ -49,6 +49,16 @@ export default {
       },
       edit: false
     }
+  },
+  methods: {
+    async listStatues(){
+      let response = await fetch('http://127.0.0.1:8000/api/statues')
+      let data = await response.json()
+      this.statues = data
+    }
+  },
+  mounted(){
+    this.listStatues()
   }
 }
 </script>
