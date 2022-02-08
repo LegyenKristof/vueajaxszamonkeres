@@ -14,7 +14,7 @@
           <td>{{statue.price}}</td>
           <td>
             <button @click="deleteStatue(statue.id)">Törlés</button>
-            <button>Szerkesztés</button>
+            <button @click="editStatue(statue.id)">Szerkesztés</button>
           </td>
         </tr>
         <tr>
@@ -23,8 +23,8 @@
           <td><input type="number" v-model="statue.price"></td>
           <td>
             <button v-if="!edit" @click="createStatue" :disabled="saving">Hozzáad</button>
-            <button v-if="edit">Mentés</button>
-            <button v-if="edit">Mégse</button>
+            <button v-if="edit" @click="saveStatue" :disabled="saving">Mentés</button>
+            <button v-if="edit" @click="cancelEdit" :disabled="saving">Mégse</button>
           </td>
         </tr>
       </tbody>
@@ -89,6 +89,29 @@ export default {
         price: null
       }
       this.edit = false
+    },
+    async editStatue(id){
+      this.edit = true
+      let response = await fetch(`http://127.0.0.1:8000/api/statues/${id}`)
+      let data = await response.json()
+      this.statue = {...data}
+    },
+    cancelEdit(){
+      this.resetForm()
+    },
+    async saveStatue(){
+      this.saving = true
+      await fetch(`http://127.0.0.1:8000/api/statues/${this.statue.id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type' : 'application/json',
+          'Accept' : 'application/json'
+        },
+        body: JSON.stringify(this.statue)
+      })
+      await this.listStatues()
+      this.saving = false
+      this.resetForm()
     }
   },
   mounted(){
