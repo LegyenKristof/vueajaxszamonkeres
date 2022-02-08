@@ -1,4 +1,4 @@
-# [Név]
+# Korcsmáros Kristóf György
 
 ## Hogyan kezdj neki?
 
