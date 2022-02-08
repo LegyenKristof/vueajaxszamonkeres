@@ -8,7 +8,7 @@
         <th>Műveletek</th>
       </thead>
       <tbody>
-        <tr v-for="statue in statues" v-bind:key="statue.id">
+        <tr v-for="statue in statues" :key="statue.id">
           <td>{{statue.person}}</td>
           <td>{{statue.height}}</td>
           <td>{{statue.price}}</td>
@@ -22,7 +22,7 @@
           <td><input type="number" v-model="statue.height"></td>
           <td><input type="number" v-model="statue.price"></td>
           <td>
-            <button v-if="!edit">Hozzáad</button>
+            <button v-if="!edit" @click="createStatue" :disabled="saving">Hozzáad</button>
             <button v-if="edit">Mentés</button>
             <button v-if="edit">Mégse</button>
           </td>
@@ -47,7 +47,8 @@ export default {
         height: null,
         price: null
       },
-      edit: false
+      edit: false,
+      saving: false
     }
   },
   methods: {
@@ -55,6 +56,29 @@ export default {
       let response = await fetch('http://127.0.0.1:8000/api/statues')
       let data = await response.json()
       this.statues = data
+    },
+    async createStatue(){
+      this.saving = true
+      await fetch('http://127.0.0.1:8000/api/statues', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(this.statue) 
+      })
+      await this.listStatues()
+      this.saving=false
+      this.resetForm()
+    },
+    resetForm(){
+      this.statue = {
+        id: null,
+        person: "",
+        height: null,
+        price: null
+      }
+      this.edit = false
     }
   },
   mounted(){
