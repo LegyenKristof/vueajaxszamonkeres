@@ -13,7 +13,7 @@
           <td>{{statue.height}}</td>
           <td>{{statue.price}}</td>
           <td>
-            <button>Törlés</button>
+            <button @click="deleteStatue(statue.id)">Törlés</button>
             <button>Szerkesztés</button>
           </td>
         </tr>
@@ -70,6 +70,16 @@ export default {
       await this.listStatues()
       this.saving=false
       this.resetForm()
+    },
+    async deleteStatue(id){
+      await fetch(`http://127.0.0.1:8000/api/statues/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      })
+      await this.listStatues()
     },
     resetForm(){
       this.statue = {
