@@ -13,8 +13,8 @@
           <td>{{statue.height}}</td>
           <td>{{statue.price}}</td>
           <td>
-            <button @click="deleteStatue(statue.id)" :disabled="saving" class="btn-dark">Törlés</button>
-            <button @click="editStatue(statue.id)" :disabled="saving" class="btn-dark">Szerkesztés</button>
+            <button @click="deleteStatue(statue.id)" :disabled="saving" class="btn-dark btn">Törlés</button>
+            <button @click="editStatue(statue.id)" :disabled="saving" class="btn-dark btn">Szerkesztés</button>
           </td>
         </tr>
         <tr>
@@ -22,9 +22,9 @@
           <td><input type="number" v-model="statue.height"></td>
           <td><input type="number" v-model="statue.price"></td>
           <td>
-            <button v-if="!edit" @click="createStatue" :disabled="saving" class="btn-dark">Hozzáad</button>
-            <button v-if="edit" @click="saveStatue" :disabled="saving" class="btn-dark">Mentés</button>
-            <button v-if="edit" @click="cancelEdit" :disabled="saving" class="btn-dark">Mégse</button>
+            <button v-if="!edit" @click="createStatue" :disabled="saving" class="btn-dark btn">Hozzáad</button>
+            <button v-if="edit" @click="saveStatue" :disabled="saving" class="btn-dark btn">Mentés</button>
+            <button v-if="edit" @click="cancelEdit" :disabled="saving" class="btn-dark btn">Mégse</button>
           </td>
         </tr>
       </tbody>
