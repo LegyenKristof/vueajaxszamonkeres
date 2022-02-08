@@ -17,6 +17,16 @@
             <button>Szerkesztés</button>
           </td>
         </tr>
+        <tr>
+          <td><input type="text" v-model="statue.person"></td>
+          <td><input type="number" v-model="statue.height"></td>
+          <td><input type="number" v-model="statue.price"></td>
+          <td>
+            <button v-if="!edit">Hozzáad</button>
+            <button v-if="edit">Mentés</button>
+            <button v-if="edit">Mégse</button>
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -36,7 +46,8 @@ export default {
         person: "",
         height: null,
         price: null
-      }
+      },
+      edit: false
     }
   }
 }
