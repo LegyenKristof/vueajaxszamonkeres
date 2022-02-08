@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <table>
+    <table class="table table-dark">
       <thead>
         <th>Személy</th>
         <th>Magasság</th>
@@ -13,8 +13,8 @@
           <td>{{statue.height}}</td>
           <td>{{statue.price}}</td>
           <td>
-            <button @click="deleteStatue(statue.id)">Törlés</button>
-            <button @click="editStatue(statue.id)">Szerkesztés</button>
+            <button @click="deleteStatue(statue.id)" :disabled="saving" class="btn-dark">Törlés</button>
+            <button @click="editStatue(statue.id)" :disabled="saving" class="btn-dark">Szerkesztés</button>
           </td>
         </tr>
         <tr>
@@ -22,9 +22,9 @@
           <td><input type="number" v-model="statue.height"></td>
           <td><input type="number" v-model="statue.price"></td>
           <td>
-            <button v-if="!edit" @click="createStatue" :disabled="saving">Hozzáad</button>
-            <button v-if="edit" @click="saveStatue" :disabled="saving">Mentés</button>
-            <button v-if="edit" @click="cancelEdit" :disabled="saving">Mégse</button>
+            <button v-if="!edit" @click="createStatue" :disabled="saving" class="btn-dark">Hozzáad</button>
+            <button v-if="edit" @click="saveStatue" :disabled="saving" class="btn-dark">Mentés</button>
+            <button v-if="edit" @click="cancelEdit" :disabled="saving" class="btn-dark">Mégse</button>
           </td>
         </tr>
       </tbody>
@@ -128,5 +128,6 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  background-color: black;  
 }
 </style>
